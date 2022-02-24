@@ -13,8 +13,8 @@ class Artifact(Actor):
     def __init__(self):
         super().__init__()
         self._message = ""
-        self._rock = rock
-        self._gem = gem
+        self._rock = ""
+        self._gem = ""
         
     def get_rock(self):
         """Gets the rocks position.
