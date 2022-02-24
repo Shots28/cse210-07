@@ -60,8 +60,8 @@ class Director:
 
         for artifact in artifacts:
             if robot.get_position().equals(artifact.get_position()):
-                self.score += artifact.get_gem() + 1
-                self.score += artifact.get_rock() - 1
+                self.score += artifact.get_gem()
+                self.score += artifact.get_rock()
                 self.total_score += self.score
 
     def _do_outputs(self, cast):
