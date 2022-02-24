@@ -17,7 +17,7 @@ class Director:
         """
         self._keyboard_service = keyboard_service
         self._video_service = video_service
-        self.score = 0
+        self.penalties = 0
         self.total_score = 0
 
     def start_game(self, cast):
@@ -43,6 +43,11 @@ class Director:
         velocity = self._keyboard_service.get_direction()
         robot.set_velocity(velocity)
 
+        artifacts = cast.get_actors("artifacts")
+        for artifact in artifacts:
+            velocity = self._keyboard_service.move_down()
+            artifact.set_velocity(velocity)
+
     def _do_updates(self, cast):
         """Updates the robot's position and resolves any collisions with artifacts.
 
@@ -59,10 +64,16 @@ class Director:
         robot.move_next(max_x, max_y)
 
         for artifact in artifacts:
+
+            artifact.move_next(max_x, max_y)
+
             if robot.get_position().equals(artifact.get_position()):
-                self.score += artifact.get_gem()
-                self.score += artifact.get_rock()
-                self.total_score += self.score
+                artifact_type = artifact.get_text()
+                if artifact_type == "*":
+                    self.total_score += 1
+
+                else:
+                    self.penalties += 1
 
     def _do_outputs(self, cast):
         """Draws the actors on the screen.
@@ -74,3 +85,7 @@ class Director:
         actors = cast.get_all_actors()
         self._video_service.draw_actors(actors)
         self._video_service.flush_buffer()
+        print(self.total_score)
+        if self.penalties > 2:
+            self._video_service.flush_buffer()
+            self._video_service.close_window()

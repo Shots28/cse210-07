@@ -14,7 +14,7 @@ from game.shared.color import Color
 from game.shared.point import Point
 
 
-FRAME_RATE = 6
+FRAME_RATE = 18
 MAX_X = 900
 MAX_Y = 600
 CELL_SIZE = 15
@@ -24,7 +24,7 @@ ROWS = 40
 CAPTION = "Greed"
 # DATA_PATH = os.path.dirname(os.path.abspath(__file__)) + "/data/messages.txt"
 WHITE = Color(255, 255, 255)
-DEFAULT_ARTIFACTS = 40
+DEFAULT_ARTIFACTS = 100
 
 
 def main():
@@ -60,6 +60,8 @@ def main():
     for n in range(DEFAULT_ARTIFACTS):
         gem = "*"
         rock = "O"
+        type_list = [gem, rock]
+        final_type = type_list[random.randint(0, 1)]
         # message = messages[n]
 
         x = random.randint(1, COLS - 1)
@@ -73,8 +75,8 @@ def main():
         color = Color(r, g, b)
 
         artifact = Artifact()
-        artifact.set_text(gem)
-        artifact.set_text(rock)
+        artifact.set_text(final_type)
+        # artifact.set_text(rock)
         artifact.set_font_size(FONT_SIZE)
         artifact.set_color(color)
         artifact.set_position(position)

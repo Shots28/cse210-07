@@ -40,3 +40,18 @@ class KeyboardService:
         direction = direction.scale(self._cell_size)
         
         return direction
+    
+    def move_down(self):
+        """Gets the selected direction based on the currently pressed keys.
+
+        Returns:
+            Point: The selected direction.
+        """
+        dx = 0
+        dy = 1
+        
+
+        direction = Point(dx, dy)
+        direction = direction.scale(self._cell_size)
+        
+        return direction

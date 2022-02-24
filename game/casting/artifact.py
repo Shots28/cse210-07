@@ -1,4 +1,5 @@
 from game.casting.actor import Actor
+from game.shared.point import Point
 
 
 class Artifact(Actor):
@@ -13,9 +14,12 @@ class Artifact(Actor):
     def __init__(self):
         super().__init__()
         self._message = ""
-        self._rock = ""
-        self._gem = ""
+        self._type = ""
         
+    def get_type(self):
+
+        return self._type
+
     def get_rock(self):
         """Gets the rocks position.
         
