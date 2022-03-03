@@ -17,7 +17,7 @@ class Director:
         """
         self._keyboard_service = keyboard_service
         self._video_service = video_service
-        # self.penalties = 0
+        self.penalties = 0
         self.total_score = 0
 
     def start_game(self, cast):
@@ -62,7 +62,6 @@ class Director:
         max_x = self._video_service.get_width()
         max_y = self._video_service.get_height()
         robot.move_next(max_x, max_y)
-        penalties = 0
 
         for artifact in artifacts:
 
@@ -74,10 +73,9 @@ class Director:
                     self.total_score += 1
 
                 else:
-                    penalties += 1
-                    return penalties
+                    self.penalties += 1
 
-    def _do_outputs(self, cast, penalties):
+    def _do_outputs(self, cast):
         """Draws the actors on the screen.
 
         Args:
@@ -88,6 +86,6 @@ class Director:
         self._video_service.draw_actors(actors)
         self._video_service.flush_buffer()
         print(self.total_score)
-        if penalties > 2:
+        if self.penalties > 2:
             self._video_service.flush_buffer()
             self._video_service.close_window()
